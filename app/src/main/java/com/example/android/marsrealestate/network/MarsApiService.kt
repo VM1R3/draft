@@ -28,19 +28,17 @@ import retrofit2.http.GET
 private const val BASE_URL = "https://api.thingspeak.com/"
 
 private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
+    .add(KotlinJsonAdapterFactory())
+    .build()
 
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
     .build()
 
-
 interface MarsApiService {
-@GET("channels/1405019/fields/1.json?api_key=RGJBEJQY3KWLHBEL&results=")
-fun getProperties():
-        Call<String>
+@GET("channels/1405019/fields/1.json?results=")
+fun getProperties():Call<MarsProperty>
 }
 
 object MarsApi {

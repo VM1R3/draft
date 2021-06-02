@@ -24,9 +24,24 @@ import com.squareup.moshi.Json
  * or rental) and the price (monthly if it's a rental).
  * The property names of this data class are used by Moshi to match the names of values in JSON.
  */
+
+
 data class MarsProperty(
-        val id: String,
-        // used to map img_src from the JSON to imgSrcUrl in our class
-        @Json(name = "img_src") val imgSrcUrl: String,
-        val type: String,
-        val price: Double)
+        val channel: Channel_data,
+        val feeds: List<Movement>
+)
+data class Channel_data(
+        val id: Double,
+        val name: String,
+        val latitude: String,
+        val longitude: String,
+        val field1: String,
+        val created_at: String,
+        val updated_at: String,
+        val last_entry_id: String
+)
+data class Movement(
+        val created_at: String,
+        val entry_id: Double,
+        val field1: String
+)
